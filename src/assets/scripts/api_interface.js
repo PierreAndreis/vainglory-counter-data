@@ -167,3 +167,5 @@ var vgAPI = {
         });
     }
 }
+
+export default vgAPI;

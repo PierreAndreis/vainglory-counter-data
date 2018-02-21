@@ -1,3 +1,5 @@
+import {loopHeroes, filters} from "./heroCounters";
+
 function animateIgnScene () {
     var ignsScreen = document.getElementById("igns-screen");
     ignsScreen.innerHTML += "<span class='player-ign main-ign'>" + IGNs[0] + "</span>";
@@ -12,7 +14,7 @@ function animateIgnScene () {
 };
 
 
-function delayData () {
+window.delayData = () => {
     setTimeout(function(){
         document.querySelector("#data-info").innerHTML = "All data is from " + filters.patch + " " + filters.gameMode + " matches";
         document.querySelector("#table-content").style.visibility = "visible";

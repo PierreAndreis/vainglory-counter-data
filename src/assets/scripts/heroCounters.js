@@ -1,20 +1,24 @@
+import Vue from "vue";
+import heroPageData from "./../../App.vue";
+
 //Global scope for IGNs
-var IGNs = ["mrdollywaggit", "xDragonx2375"],
-    ignIndex = 0,
-    ignIndexCounter = 0,
-    output = {},
-    filters = {
-        gameMode: "5v5_pvp_casual",
-        createdStart: new Date(new Date().setDate(new Date().getDate() - 27)).toISOString(),
-        patch: "3.0",
-        apiKey: "Bearer aaa.bbb.ccc",
-        minSkillTier: 0, //currently horrible
-        rateLimit: 10
-    },
-    totalMatches = 0;
+let IGNs = ["mrdollywaggit", "xDragonx2375"];
+let ignIndex = 0;
+let ignIndexCounter = 0;
+let output = {};
+export let filters = {
+    gameMode: "5v5_pvp_casual",
+    createdStart: new Date(new Date().setDate(new Date().getDate() - 27)).toISOString(),
+    patch: "3.0",
+    apiKey: "Bearer aaa.bbb.ccc",
+    minSkillTier: 0, //currently horrible
+    rateLimit: 10
+};
+
+let totalMatches = 0;
 
 
-function restartSearch() {
+window.restartSearch = () => {
     IGNs = ["FlashX","mrprgr"],
     ignIndex = 0,
     ignIndexCounter = 0,
@@ -22,7 +26,16 @@ function restartSearch() {
     totalMatches = 0;
 }
 
-function loopHeroes () {
+export const setValues = (obj) => {
+  // yuck lmao
+  if (obj.output)          output          = obj.output;
+  if (obj.IGNs)            IGNs            = obj.IGNs;
+  if (obj.totalMatches)    totalMatches    = obj.totalMatches;
+  if (obj.ignIndex)        ignIndex        = obj.ignIndex;
+  if (obj.ignIndexCounter) ignIndexCounter = obj.ignIndexCounter;
+}
+
+export const loopHeroes = () => {
     var delay = Math.round(60/filters.rateLimit*2000);
     
     //Loop through heroes
@@ -37,7 +50,7 @@ function loopHeroes () {
     }, delay);
 }
 
-function updateWebpage() {
+export const updateWebpage = () => {
     var loopStarted = false;
     //Check if API key has been submit yet.
     setInterval(function(){
@@ -56,7 +69,10 @@ function updateWebpage() {
     },2000);
 }
 //Actually use API
-function retrieveMatchHistory(playerName, teamName, filters) {
+
+//** internals */
+
+const retrieveMatchHistory = (playerName, teamName, filters) => {
     vgAPI.key = filters.apiKey;
     //Use API interface
     vgAPI.getMatchList({
@@ -75,7 +91,7 @@ function retrieveMatchHistory(playerName, teamName, filters) {
     ignIndexCounter++;
 }
 
-function addIGN(currentInc) {
+const addIGN = (currentInc) => {
     var IGN = currentInc.attributes.name.replace(" ","").replace("\n","");
     if (IGNs.indexOf(IGN) == -1) {
         IGNs.push(IGN);
@@ -86,7 +102,7 @@ function addIGN(currentInc) {
 //Store roster values in array like ["winner",["loser","loser","loser"]]
 
 //Find roster object through match to be able to reference participants and get heroes
-function getRosters(data, playerName) { 
+const getRosters = (data, playerName) => { 
     outputMatchData = [];
     for (var i = 0; i < data.data.length; i++) {
         var currentRoster = data.data[i].relationships.rosters.data;
@@ -96,7 +112,7 @@ function getRosters(data, playerName) {
     return outputMatchData;
 }
 
-function mapParticipantHeroes(heroData, participants) {
+const mapParticipantHeroes = (heroData, participants) => {
     for (var i = 0; i < heroData.length; i++) {
         //Replace heroData participant ID with hero name
         var winnerName = participants[heroData[i][0]];
@@ -193,7 +209,7 @@ function mapParticipantHeroes(heroData, participants) {
     localStorage.setItem("saveFile", saveData);
 }
 
-function getHeroData(data, playerName) {
+const getHeroData = (data, playerName) => {
     var rostersList = getRosters(data, playerName),
         adjustedRosters = rostersList.join();
     adjustedRosters = adjustedRosters.split(",");
@@ -263,7 +279,7 @@ function getHeroData(data, playerName) {
 }
 
 //Console commands
-function getStrongestCounter(hero) {
+window.getStrongestCounter = (hero) => {
     var dataForHero = output[hero],
         bestHero = "";
     for (var enemyHero in dataForHero) {
@@ -275,7 +291,7 @@ function getStrongestCounter(hero) {
     console.log(bestHero)
 }
 
-function getWeakestCounter(hero) {
+window.getWeakestCounter = (hero) => {
     var dataForHero = output[hero],
         bestHero = "";
     for (var enemyHero in dataForHero) {
@@ -287,8 +303,8 @@ function getWeakestCounter(hero) {
     console.log(bestHero)
 }
 
-function getMostFrequentMatchup() {
-    var highestPoint = ["", 0];
+window.getMostFrequentMatchup = () => {
+  var highestPoint = ["", 0];
     for (var a in output) {
         for (var b in output[a]) {
             if (output[a][b].matches > highestPoint[1]) {
@@ -300,7 +316,7 @@ function getMostFrequentMatchup() {
     return highestPoint;
 }
 
-function getLeastFrequentMatchup() {
+window.getLeastFrequentMatchup = () => {
     var highestPoint = ["", 100000000];
     for (var a in output) {
         for (var b in output[a]) {
@@ -313,7 +329,7 @@ function getLeastFrequentMatchup() {
     return highestPoint;
 }
 
-function getBestMatchup() {
+window.getBestMatchup = () => {
     var highestPoint = ["", 0];
     for (var a in output) {
         for (var b in output[a]) {
@@ -326,7 +342,7 @@ function getBestMatchup() {
     return highestPoint;
 }
 
-function getWorstMatchup() {
+window.getWorstMatchup = () => {
     var highestPoint = ["", 1000];
     for (var a in output) {
         for (var b in output[a]) {
@@ -340,4 +356,5 @@ function getWorstMatchup() {
 }
 
 console.log("Searching with filters:", filters);
-//loopHeroes();
+
+export default output;

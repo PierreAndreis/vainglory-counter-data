@@ -4,7 +4,9 @@
   "description": "Find counters for specific VG heroes",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "keywords": [
     "vainglory"
@@ -12,9 +14,16 @@
   "author": "P G",
   "license": "MIT",
   "dependencies": {
-    "vainglory": "^1.3.8"
+    "chart.js": "^2.7.1",
+    "vainglory": "^1.3.8",
+    "vue": "^2.5.13",
+    "vuejs": "^3.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "parcel-bundler": "^1.6.2",
+    "parcel-plugin-vue": "^1.5.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zeroclutch/Vainglory-Counter-Data.git"

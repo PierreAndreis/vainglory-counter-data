@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3347147-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-3347147-10');
+    </script>
+    
+    <title>Vainglory Hero Data</title>
+    <link href="assets/styles/style.css" rel="stylesheet" type="text/css">
+    <link href="assets/styles/bulma.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="spaceless">
+    
+    <section class="entry-screen">
+        <a id="save-file" class="button is-primary"></a>
+        <a id="preload-file" class="button is-info"></a>
+        <a class="button" href="https://github.com/zeroclutch/vainglory-counter-data">
+            <span class="icon">
+                <i class="fab fa-github"></i>
+            </span>
+            <span>View on GitHub</span>
+        </a>
+    </section>
+
+    <section id="igns-screen"></section>
+
+    <section id="hero-data-holder" class="responsive data-holder">
+        <div id="app"></div>
+    </section>
+
+    
+    <!--LIBRARIES-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <script src="./app.js"></script>
+
+    <!--API INTERFACE-->
+    <script src="assets/scripts/api_interface.js"></script>
+
+    <!--HERO DATA-->
+    <script src="example_data/preloadedData.js"></script>
+    
+    <!--WEBPAGE SCRIPTS-->
+    <script src="assets/scripts/console.js"></script>
+    <script src="assets/scripts/permalink.js"></script>
+    <script src="assets/scripts/detectPaths.js"></script>
+    <script src="assets/scripts/updateInfo.js"></script>
+    <script src="assets/scripts/managePageScenes.js"></script>
+</body>
+
+</html>

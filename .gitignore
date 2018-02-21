@@ -1,5 +1,7 @@
 node_modules/
-index.js
 *.json
 *.log
 .DS_Store
+
+.cache/
+dist/
