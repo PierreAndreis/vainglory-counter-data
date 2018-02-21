@@ -72,7 +72,6 @@ import output from "./assets/scripts/heroCounters";
 export default {
   name: "lol",
   data: function() {
-    console.log(outputData);
     return {
       outputData: output,
       currentHero: "Adagio Crystal",
@@ -84,6 +83,10 @@ export default {
       lastHero: ""
     }
   },
-  methods: {}
+  methods: {
+    updateData: function (key, data) {
+        this[key] = data;
+    }
+  }
 };
 </script>

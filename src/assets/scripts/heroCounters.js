@@ -59,12 +59,12 @@ export const updateWebpage = () => {
             loopStarted = true;
             console.log("API Key entered! Now searching for matches.")
         } else {
-            heroPageData.outputData = output;
-            heroPageData.totalMatches = totalMatches;
-            heroPageData.ignsDone = ignIndexCounter;
-            heroPageData.ignsLeft = (IGNs.length-ignIndexCounter);
-            heroPageData.ignList = IGNs;
-            heroPageData.strongestCounter = getStrongestCounter(heroPageData.currentHero);
+            heroPageData.$el.updateData("outputData",       output);
+            heroPageData.$el.updateData("totalMatches",     totalMatches);
+            heroPageData.$el.updateData("ignsDone",         ignIndexCounter);
+            heroPageData.$el.updateData("ignsLeft",         (IGNs.length-ignIndexCounter));
+            heroPageData.$el.updateData("ignList",          IGNs);
+            heroPageData.$el.updateData("strongestCounter", getStrongestCounter(heroPageData.currentHero));
         }
     },2000);
 }
