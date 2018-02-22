@@ -56,8 +56,6 @@
       async loadInstance() {
         try {
 
-          console.log('oi')
-
           // create a temporary data
           let data = {
             output          : this.simplePreloadData[0],
@@ -88,7 +86,7 @@
           }
           // this.delayData()
 
-          this.$router.push('/informations')
+          this.$router.push('/Adagio Crystal')
 
         } catch (e) {
           console.log(e)
